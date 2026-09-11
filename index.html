@@ -1,71 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt">
-<>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>meu app</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #f2f4f7;
-  text-align: center;
-}
-
-.caixa {
-  margin: 60px 20px;
-  padding: 30px 20px;
-  background: white;
-  border-radius: 25px;
-}
-
-h1 {
-  font-size: 38px;
-}
-
-button {
-  padding: 15px 35px;
-  border: none;
-  border-radius: 30px;
-  font-size: 18px;
-  background: black;
-  color: white;
-}
-</style>
-</<link rel="manifest" href="manifest.json">
-</head>>
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wi-Fi Grátis</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #f2f4f7;
+      text-align: center;
+    }
+    .caixa {
+      margin: 60px 20px;
+      padding: 30px 20px;
+      background: white;
+      border-radius: 20px;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    button {
+      padding: 15px 30px;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      background: black;
+      color: white;
+    }
+  </style>
+</head>
 <body>
+  <div class="caixa" id="principal">
+    <h1>Wi-Fi Grátis</h1>
+    <p>Encontra wi-fi disponível, e economiza os teus dados.</p>
+    <button onclick="procurar()">PROCURAR ROUTER</button>
+  </div>
 
-<div class="caixa" id="inicio">
-  <h1>meu app</h1>
-  <p>Encontra Wi-Fi disponível e economiza os teus dados.</p>
-  <button onclick="abrirApp()">COMEÇAR</button>
-</div>
+  <div class="caixa" id="painel" style="display: none;">
+    <h1>Wi-Fi Grátis disponível</h1>
+    <p>A procurar redes wi-fi disponiveis perto de você...</p>
+    <p>Por favor aguarde um momento para processarmos os dados...</p>
+    <p id="resultado"></p>
+  </div>
 
-<div class="caixa" id="principal" style="display:none;">
-<h1>wi-fi grátis</h1>
-<p>Encontra redes wi-fi disponíveis perto de ti.</p>
-<button onclick="procurarWifi()">procurar wi-fi</button>
+  <script>
+    function procurar() {
+      document.getElementById("principal").style.display = "none";
+      document.getElementById("painel").style.display = "block";
+    }
+  </script>
 
-<p id="resultado"></p>
-
-<script>
-function procurarWifi() {
-  document.getElementById("resultado").innerText =
-  "A procurar redes wi-fi disponíveis...";
-}
-</script>
-</div>
-
-<script>
-function abrirApp() {
-  document.getElementById("inicio").style.display = "none";
-  document.getElementById("principal").style.display = "block";
-}
-</script>
-
+  <!-- Código de registro do Service Worker adicionado -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
 </body>
 </html>
